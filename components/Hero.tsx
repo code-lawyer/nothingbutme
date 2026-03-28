@@ -10,8 +10,8 @@ export default function Hero() {
         <footer className="mt-1 not-italic text-[13px]">— Your Name</footer>
       </blockquote>
 
-      {/* Name + photo row */}
-      <div className="flex items-start gap-5">
+      {/* Name + photo row — stacks on mobile */}
+      <div className="flex flex-col sm:flex-row items-start gap-5">
         <Image
           src="/avatar.jpg"
           alt="Profile photo"
@@ -21,7 +21,7 @@ export default function Hero() {
           priority
         />
         <div>
-          <h1 className="text-[36px] font-bold text-[#111111] leading-tight tracking-tight">
+          <h1 className="text-[32px] sm:text-[36px] font-bold text-[#111111] leading-tight tracking-tight">
             Your Name
           </h1>
           <p className="text-[14px] text-[#6b7280] mt-1 mb-3">
