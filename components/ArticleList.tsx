@@ -7,10 +7,6 @@ interface Props {
   showAll?: boolean;
 }
 
-function formatDate(dateStr: string): string {
-  return dateStr;
-}
-
 export default function ArticleList({ articles, showAll = false }: Props) {
   const displayed = showAll ? articles : articles.slice(0, 5);
 
@@ -28,7 +24,7 @@ export default function ArticleList({ articles, showAll = false }: Props) {
             className="group flex items-baseline gap-6 py-3 px-2 -mx-2 rounded hover:bg-[#f9fafb] transition-colors"
           >
             <span className="text-[13px] text-[#6b7280] font-mono flex-shrink-0 w-24">
-              {formatDate(article.date)}
+              {article.date}
             </span>
             <span className="flex-1 text-[15px] text-[#111111] group-hover:text-[#2563eb] transition-colors">
               {article.title}

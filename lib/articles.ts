@@ -2,6 +2,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { cache } from "react";
 import { notFound } from "next/navigation";
 
 export interface Article {
@@ -18,11 +19,18 @@ export interface ArticleWithContent extends Article {
 
 const articlesDir = path.join(process.cwd(), "content/articles");
 
+function normalizeFrontmatterDate(raw: unknown): string {
+  return raw instanceof Date ? raw.toISOString().slice(0, 10) : (raw as string);
+}
+
 export function getAllArticles(): Article[] {
-  if (!fs.existsSync(articlesDir)) {
-    return [];
+  let files: string[];
+  try {
+    files = fs.readdirSync(articlesDir).filter((f) => f.endsWith(".mdx"));
+  } catch (err: unknown) {
+    if ((err as NodeJS.ErrnoException).code === "ENOENT") return [];
+    throw err;
   }
-  const files = fs.readdirSync(articlesDir).filter((f) => f.endsWith(".mdx"));
 
   const articles = files.map((filename) => {
     const slug = filename.replace(/\.mdx$/, "");
@@ -32,9 +40,7 @@ export function getAllArticles(): Article[] {
     return {
       slug,
       title: data.title as string,
-      date: data.date instanceof Date
-        ? data.date.toISOString().slice(0, 10)
-        : (data.date as string),
+      date: normalizeFrontmatterDate(data.date),
       tags: (data.tags as string[]) ?? [],
       summary: (data.summary as string) ?? "",
     };
@@ -45,24 +51,22 @@ export function getAllArticles(): Article[] {
   );
 }
 
-export function getArticleBySlug(slug: string): ArticleWithContent {
+export const getArticleBySlug = cache(function getArticleBySlug(slug: string): ArticleWithContent {
   const filepath = path.join(articlesDir, `${slug}.mdx`);
   let raw: string;
   try {
     raw = fs.readFileSync(filepath, "utf-8");
   } catch {
-    notFound(); // throws internally, never returns
+    notFound();
   }
-  const { data, content } = matter(raw!);
+  const { data, content } = matter(raw);
 
   return {
     slug,
     title: data.title as string,
-    date: data.date instanceof Date
-      ? data.date.toISOString().slice(0, 10)
-      : (data.date as string),
+    date: normalizeFrontmatterDate(data.date),
     tags: (data.tags as string[]) ?? [],
     summary: (data.summary as string) ?? "",
     content,
   };
-}
+});
