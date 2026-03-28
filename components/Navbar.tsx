@@ -16,14 +16,15 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    setScrolled(window.scrollY > 10);
     const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 h-14 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 h-14 transition-colors duration-200 ${
         scrolled
           ? "bg-[#fafafa]/80 backdrop-blur-md border-b border-[#e5e7eb]"
           : "bg-transparent"
@@ -55,6 +56,8 @@ export default function Navbar() {
           className="sm:hidden text-[#6b7280] p-1"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
             {menuOpen ? (
@@ -76,7 +79,12 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="sm:hidden bg-[#fafafa]/95 backdrop-blur-md border-b border-[#e5e7eb] px-6 py-4 flex flex-col gap-4">
+        <div
+          id="mobile-menu"
+          role="navigation"
+          aria-label="Mobile navigation"
+          className="sm:hidden bg-[#fafafa]/95 backdrop-blur-md border-b border-[#e5e7eb] px-6 py-4 flex flex-col gap-4"
+        >
           {links.map((link) => (
             <Link
               key={link.href}
