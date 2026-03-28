@@ -32,7 +32,7 @@ export default function ProjectList({ projects, showAll = false }: Props) {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[13px] text-[#9ca3af] hover:text-[#2563eb] transition-colors opacity-0 group-hover:opacity-100 flex-shrink-0"
+              className="text-[13px] text-[#9ca3af] hover:text-[#2563eb] transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100 flex-shrink-0"
               aria-label={`${project.name} on GitHub`}
             >
               GitHub ↗

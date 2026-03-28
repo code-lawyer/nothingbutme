@@ -18,6 +18,9 @@ export interface ArticleWithContent extends Article {
 const articlesDir = path.join(process.cwd(), "content/articles");
 
 export function getAllArticles(): Article[] {
+  if (!fs.existsSync(articlesDir)) {
+    return [];
+  }
   const files = fs.readdirSync(articlesDir).filter((f) => f.endsWith(".mdx"));
 
   const articles = files.map((filename) => {
