@@ -1,4 +1,4 @@
-// app/articles/[slug]/page.tsx
+// app/(site)/articles/[slug]/page.tsx
 import { getAllArticles, getArticleBySlug } from "@/lib/articles";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";

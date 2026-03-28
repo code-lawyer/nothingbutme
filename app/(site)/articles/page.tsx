@@ -1,4 +1,4 @@
-// app/articles/page.tsx
+// app/(site)/articles/page.tsx
 import ArticleList from "@/components/ArticleList";
 import { getAllArticles } from "@/lib/articles";
 

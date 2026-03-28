@@ -1,4 +1,4 @@
-// app/projects/page.tsx
+// app/(site)/projects/page.tsx
 import ProjectList from "@/components/ProjectList";
 import { projects } from "@/data/projects";
 
