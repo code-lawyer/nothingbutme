@@ -31,7 +31,9 @@ export function getAllArticles(): Article[] {
     return {
       slug,
       title: data.title as string,
-      date: data.date as string,
+      date: data.date instanceof Date
+        ? data.date.toISOString().slice(0, 10)
+        : (data.date as string),
       tags: (data.tags as string[]) ?? [],
       summary: (data.summary as string) ?? "",
     };
@@ -50,7 +52,9 @@ export function getArticleBySlug(slug: string): ArticleWithContent {
   return {
     slug,
     title: data.title as string,
-    date: data.date as string,
+    date: data.date instanceof Date
+      ? data.date.toISOString().slice(0, 10)
+      : (data.date as string),
     tags: (data.tags as string[]) ?? [],
     summary: (data.summary as string) ?? "",
     content,
