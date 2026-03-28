@@ -8,8 +8,7 @@ interface Props {
 }
 
 function formatDate(dateStr: string): string {
-  const d = new Date(dateStr);
-  return d.toISOString().slice(0, 10);
+  return dateStr;
 }
 
 export default function ArticleList({ articles, showAll = false }: Props) {

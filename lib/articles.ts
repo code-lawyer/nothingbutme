@@ -2,6 +2,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { notFound } from "next/navigation";
 
 export interface Article {
   slug: string;
@@ -46,8 +47,13 @@ export function getAllArticles(): Article[] {
 
 export function getArticleBySlug(slug: string): ArticleWithContent {
   const filepath = path.join(articlesDir, `${slug}.mdx`);
-  const raw = fs.readFileSync(filepath, "utf-8");
-  const { data, content } = matter(raw);
+  let raw: string;
+  try {
+    raw = fs.readFileSync(filepath, "utf-8");
+  } catch {
+    notFound(); // throws internally, never returns
+  }
+  const { data, content } = matter(raw!);
 
   return {
     slug,
