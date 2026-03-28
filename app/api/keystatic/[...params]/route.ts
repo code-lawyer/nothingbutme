@@ -1,6 +1,19 @@
-import { makeRouteHandler } from '@keystatic/next/route-handler';
-import config from '../../../../keystatic.config';
-
 export const dynamic = 'force-dynamic';
 
-export const { POST, GET } = makeRouteHandler({ config });
+export async function GET(req: Request) {
+  const [{ makeRouteHandler }, { default: config }] = await Promise.all([
+    import('@keystatic/next/route-handler'),
+    import('../../../../keystatic.config'),
+  ]);
+  const { GET: handler } = makeRouteHandler({ config });
+  return handler(req);
+}
+
+export async function POST(req: Request) {
+  const [{ makeRouteHandler }, { default: config }] = await Promise.all([
+    import('@keystatic/next/route-handler'),
+    import('../../../../keystatic.config'),
+  ]);
+  const { POST: handler } = makeRouteHandler({ config });
+  return handler(req);
+}
