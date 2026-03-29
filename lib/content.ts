@@ -13,10 +13,10 @@ function readJson<T>(filepath: string): T | null {
 
 export interface Profile {
   name: string;
+  avatar: string | null;
   quote: string;
   identityTags: string;
   intro: string;
-  avatarAlt: string;
 }
 
 export interface About {
@@ -33,10 +33,10 @@ export interface FooterData {
 const defaults = {
   profile: {
     name: "Your Name",
+    avatar: null,
     quote: "",
     identityTags: "",
     intro: "",
-    avatarAlt: "Profile photo",
   } satisfies Profile,
   about: {
     paragraphs: [],

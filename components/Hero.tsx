@@ -6,6 +6,8 @@ interface Props {
 }
 
 export default function Hero({ profile }: Props) {
+  const avatarSrc = profile.avatar || "/avatar.jpg";
+
   return (
     <section className="max-w-[680px] mx-auto px-6 pt-32 pb-0">
       {profile.quote && (
@@ -17,8 +19,8 @@ export default function Hero({ profile }: Props) {
 
       <div className="flex flex-col sm:flex-row items-start gap-5">
         <Image
-          src="/avatar.jpg"
-          alt={profile.avatarAlt}
+          src={avatarSrc}
+          alt={profile.name}
           width={100}
           height={120}
           className="rounded-lg object-cover flex-shrink-0 grayscale"

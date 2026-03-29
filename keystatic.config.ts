@@ -17,10 +17,14 @@ export default config({
       path: 'content/profile',
       schema: {
         name: fields.text({ label: '姓名' }),
+        avatar: fields.image({
+          label: '头像',
+          directory: 'public/images/profile',
+          publicPath: '/images/profile/',
+        }),
         quote: fields.text({ label: '金句', multiline: true }),
         identityTags: fields.text({ label: '身份标签', description: '用 · 分隔，如"律师 · 写作者 · 程序员"' }),
         intro: fields.text({ label: '一句话介绍', multiline: true }),
-        avatarAlt: fields.text({ label: '头像 alt 文字' }),
       },
     }),
     about: singleton({
