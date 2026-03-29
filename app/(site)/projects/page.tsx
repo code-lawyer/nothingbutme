@@ -1,13 +1,14 @@
-// app/(site)/projects/page.tsx
-import ProjectList from "@/components/ProjectList";
-import { projects } from "@/data/projects";
+import FilteredProjectList from "@/components/FilteredProjectList";
+import { getAllProjects } from "@/lib/projects";
 
 export const metadata = { title: "项目 — Your Name" };
 
 export default function ProjectsPage() {
+  const projects = getAllProjects();
+
   return (
     <main className="pt-14">
-      <ProjectList projects={projects} showAll />
+      <FilteredProjectList projects={projects} />
     </main>
   );
 }

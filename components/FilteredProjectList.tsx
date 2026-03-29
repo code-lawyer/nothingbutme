@@ -1,22 +1,36 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import CategoryTabs from "./CategoryTabs";
 import type { Project } from "@/lib/projects";
+
+const PROJECT_CATEGORIES = [
+  { value: "all", label: "全部" },
+  { value: "web", label: "Web 应用" },
+  { value: "tool", label: "工具" },
+  { value: "opensource", label: "开源" },
+  { value: "experiment", label: "实验" },
+];
 
 interface Props {
   projects: Project[];
-  showAll?: boolean;
 }
 
-export default function ProjectList({ projects, showAll = false }: Props) {
-  const displayed = showAll ? projects : projects.slice(0, 4);
+export default function FilteredProjectList({ projects }: Props) {
+  const [category, setCategory] = useState("all");
+  const filtered = category === "all" ? projects : projects.filter((p) => p.category === category);
 
   return (
-    <section id="projects" className="max-w-[680px] mx-auto px-6 pt-[120px]">
+    <section className="max-w-[680px] mx-auto px-6 pt-[120px]">
       <h2 className="text-[13px] font-semibold text-[#6b7280] uppercase tracking-widest mb-8">
         项目
       </h2>
 
+      <CategoryTabs tabs={PROJECT_CATEGORIES} activeCategory={category} onCategoryChange={setCategory} />
+
       <div className="divide-y divide-[#e5e7eb]">
-        {displayed.map((project) => (
+        {filtered.map((project) => (
           <div
             key={project.slug}
             className="group flex items-center gap-6 py-3 px-2 -mx-2 rounded hover:bg-[#f9fafb] transition-colors"
@@ -38,18 +52,10 @@ export default function ProjectList({ projects, showAll = false }: Props) {
             </Link>
           </div>
         ))}
+        {filtered.length === 0 && (
+          <p className="py-8 text-[14px] text-[#9ca3af] text-center">暂无此分类的项目</p>
+        )}
       </div>
-
-      {!showAll && (
-        <div className="mt-6">
-          <Link
-            href="/projects"
-            className="text-[13px] text-[#6b7280] hover:text-[#2563eb] transition-colors"
-          >
-            查看全部 →
-          </Link>
-        </div>
-      )}
     </section>
   );
 }

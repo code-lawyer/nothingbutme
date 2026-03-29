@@ -1,0 +1,7 @@
+{
+  "name": "legal-parser",
+  "description": "Parse and extract structured data from Chinese legal documents using Python",
+  "url": "https://github.com/yourusername/legal-parser",
+  "category": "tool",
+  "featured": true
+}

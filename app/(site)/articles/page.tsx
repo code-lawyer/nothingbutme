@@ -1,5 +1,4 @@
-// app/(site)/articles/page.tsx
-import ArticleList from "@/components/ArticleList";
+import FilteredArticleList from "@/components/FilteredArticleList";
 import { getAllArticles } from "@/lib/articles";
 
 export const metadata = { title: "文章 — Your Name" };
@@ -9,7 +8,7 @@ export default function ArticlesPage() {
 
   return (
     <main className="pt-14">
-      <ArticleList articles={articles} showAll />
+      <FilteredArticleList articles={articles} />
     </main>
   );
 }

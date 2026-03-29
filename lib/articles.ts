@@ -9,6 +9,7 @@ export interface Article {
   slug: string;
   title: string;
   date: string;
+  category: string;
   tags: string[];
   summary: string;
 }
@@ -41,6 +42,7 @@ export function getAllArticles(): Article[] {
       slug,
       title: data.title as string,
       date: normalizeFrontmatterDate(data.date),
+      category: (data.category as string) ?? "essay",
       tags: (data.tags as string[]) ?? [],
       summary: (data.summary as string) ?? "",
     };
@@ -65,6 +67,7 @@ export const getArticleBySlug = cache(function getArticleBySlug(slug: string): A
     slug,
     title: data.title as string,
     date: normalizeFrontmatterDate(data.date),
+    category: (data.category as string) ?? "essay",
     tags: (data.tags as string[]) ?? [],
     summary: (data.summary as string) ?? "",
     content,

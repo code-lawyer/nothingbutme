@@ -1,25 +1,20 @@
-// components/Footer.tsx
 import Link from "next/link";
+import type { FooterData } from "@/lib/content";
 
-const contactLinks = [
-  { label: "Email", href: "mailto:you@example.com" },
-  { label: "GitHub", href: "https://github.com/yourusername" },
-  { label: "Twitter / X", href: "https://x.com/yourusername" },
-];
+interface Props {
+  footer: FooterData;
+}
 
-export default function Footer() {
+export default function Footer({ footer }: Props) {
   return (
-    <footer
-      id="contact"
-      className="max-w-[680px] mx-auto px-6 pt-[120px] pb-16"
-    >
+    <footer id="contact" className="max-w-[680px] mx-auto px-6 pt-[120px] pb-16">
       <div className="border-t border-[#e5e7eb] pt-10">
-        <p className="text-[14px] text-[#6b7280] mb-6">
-          如果你想聊聊，可以通过以下方式找到我
-        </p>
+        {footer.contactText && (
+          <p className="text-[14px] text-[#6b7280] mb-6">{footer.contactText}</p>
+        )}
 
         <div className="flex flex-wrap gap-6">
-          {contactLinks.map((link) => (
+          {footer.links.map((link) => (
             <Link
               key={link.label}
               href={link.href}
@@ -33,7 +28,7 @@ export default function Footer() {
         </div>
 
         <p className="mt-10 text-[12px] text-[#9ca3af]">
-          © {new Date().getFullYear()} Your Name
+          © {new Date().getFullYear()} {footer.copyright}
         </p>
       </div>
     </footer>

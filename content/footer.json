@@ -1,0 +1,9 @@
+{
+  "contactText": "如果你想聊聊，可以通过以下方式找到我",
+  "links": [
+    { "label": "Email", "href": "mailto:you@example.com" },
+    { "label": "GitHub", "href": "https://github.com/yourusername" },
+    { "label": "Twitter / X", "href": "https://x.com/yourusername" }
+  ],
+  "copyright": "Your Name"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "contract-diff",
+  "description": "Semantic diff tool for contract versions — highlights meaning changes, not just text",
+  "url": "https://github.com/yourusername/contract-diff",
+  "category": "tool",
+  "featured": true
+}
