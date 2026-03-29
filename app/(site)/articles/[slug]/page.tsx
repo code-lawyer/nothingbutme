@@ -41,7 +41,29 @@ export default async function ArticlePage({ params }: Props) {
         </div>
       </header>
 
-      <article className="prose prose-gray max-w-none text-[15px] leading-[1.8] text-[#374151] [&_h1]:text-[#111111] [&_h2]:text-[#111111] [&_code]:font-mono [&_code]:text-[14px] [&_a]:text-[#2563eb]">
+      <article
+        className={[
+          "prose prose-gray max-w-none",
+          /* 正文 */
+          "text-[16px] leading-[2] text-[#374151]",
+          /* 标题 */
+          "[&_h2]:text-[20px] [&_h2]:font-semibold [&_h2]:text-[#111111] [&_h2]:mt-14 [&_h2]:mb-6",
+          "[&_h3]:text-[17px] [&_h3]:font-semibold [&_h3]:text-[#111111]",
+          /* 段落间距 */
+          "[&_p]:my-5",
+          /* 引用块 */
+          "[&_blockquote]:border-l-[3px] [&_blockquote]:border-[#d1d5db] [&_blockquote]:pl-5 [&_blockquote]:text-[15px] [&_blockquote]:text-[#6b7280] [&_blockquote]:italic [&_blockquote]:my-8",
+          "[&_blockquote_p]:my-2",
+          /* 粗体 */
+          "[&_strong]:text-[#111111] [&_strong]:font-semibold",
+          /* 链接 */
+          "[&_a]:text-[#2563eb] [&_a]:no-underline hover:[&_a]:underline",
+          /* 代码 */
+          "[&_code]:font-mono [&_code]:text-[14px]",
+          /* 列表 */
+          "[&_li]:my-1",
+        ].join(" ")}
+      >
         <MDXRemote source={article.content} />
       </article>
     </main>
