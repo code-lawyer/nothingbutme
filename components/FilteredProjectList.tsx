@@ -46,14 +46,17 @@ export default function FilteredProjectList({ projects }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               className="text-[13px] text-[#9ca3af] hover:text-[#2563eb] transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100 flex-shrink-0"
-              aria-label={`${project.name} on GitHub`}
+              aria-label={`在 GitHub 查看 ${project.name}`}
             >
               GitHub ↗
             </Link>
           </div>
         ))}
         {filtered.length === 0 && (
-          <p className="py-8 text-[14px] text-[#9ca3af] text-center">暂无此分类的项目</p>
+          <p className="py-8 text-[14px] text-[#9ca3af] text-center">
+            这个分类下还没有项目，
+            <button onClick={() => setCategory("all")} className="text-[#2563eb] hover:underline">查看全部项目</button>
+          </p>
         )}
       </div>
     </section>

@@ -11,7 +11,11 @@ const links = [
   { href: "/#contact", label: "联系" },
 ];
 
-export default function Navbar() {
+interface Props {
+  siteName?: string;
+}
+
+export default function Navbar({ siteName = "首页" }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -35,7 +39,7 @@ export default function Navbar() {
           href="/"
           className="text-[#111111] font-medium text-sm tracking-tight hover:text-[#2563eb] transition-colors"
         >
-          Your Name
+          {siteName}
         </Link>
 
         {/* Desktop nav */}
@@ -55,7 +59,7 @@ export default function Navbar() {
         <button
           className="sm:hidden text-[#6b7280] p-1"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          aria-label={menuOpen ? "关闭菜单" : "打开菜单"}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
         >
@@ -82,7 +86,7 @@ export default function Navbar() {
         <div
           id="mobile-menu"
           role="navigation"
-          aria-label="Mobile navigation"
+          aria-label="导航菜单"
           className="sm:hidden bg-[#fafafa]/95 backdrop-blur-md border-b border-[#e5e7eb] px-6 py-4 flex flex-col gap-4"
         >
           {links.map((link) => (

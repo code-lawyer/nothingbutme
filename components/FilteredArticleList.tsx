@@ -48,7 +48,10 @@ export default function FilteredArticleList({ articles }: Props) {
           </Link>
         ))}
         {filtered.length === 0 && (
-          <p className="py-8 text-[14px] text-[#9ca3af] text-center">暂无此分类的文章</p>
+          <p className="py-8 text-[14px] text-[#9ca3af] text-center">
+            这个分类下还没有文章，
+            <button onClick={() => setCategory("all")} className="text-[#2563eb] hover:underline">查看全部文章</button>
+          </p>
         )}
       </div>
     </section>

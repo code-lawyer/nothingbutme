@@ -17,11 +17,6 @@ export default config({
       path: 'content/profile',
       schema: {
         name: fields.text({ label: '姓名' }),
-        avatar: fields.image({
-          label: '头像',
-          directory: 'public/images/profile',
-          publicPath: '/images/profile/',
-        }),
         quote: fields.text({ label: '金句', multiline: true }),
         identityTags: fields.text({ label: '身份标签', description: '用 · 分隔，如"律师 · 写作者 · 程序员"' }),
         intro: fields.text({ label: '一句话介绍', multiline: true }),
@@ -33,16 +28,16 @@ export default config({
       schema: {
         paragraphs: fields.array(
           fields.text({ label: '段落', multiline: true }),
-          { label: '关于段落', itemLabel: (props) => props.value.slice(0, 30) + '…' }
+          { label: '自我介绍段落', itemLabel: (props) => props.value ? props.value.slice(0, 30) + '…' : '（空段落）' }
         ),
-        currentProject: fields.text({ label: '目前在做', description: '当前进行中的项目或事务' }),
+        currentProject: fields.text({ label: '目前在做', description: '显示在"关于我"底部，如"某个合同解析的小工具"' }),
       },
     }),
     footer: singleton({
       label: '联系方式',
       path: 'content/footer',
       schema: {
-        contactText: fields.text({ label: '联系提示语' }),
+        contactText: fields.text({ label: '联系提示语', description: '页脚联系区域的引导文字' }),
         links: fields.array(
           fields.object({
             label: fields.text({ label: '名称', description: '如 Email, GitHub, Twitter' }),
@@ -50,7 +45,7 @@ export default config({
           }),
           { label: '联系链接', itemLabel: (props) => props.fields.label.value }
         ),
-        copyright: fields.text({ label: '版权署名' }),
+        copyright: fields.text({ label: '版权署名', description: '页脚 © 后显示的名字' }),
       },
     }),
   },
@@ -80,7 +75,7 @@ export default config({
           fields.text({ label: '标签' }),
           { label: '标签', itemLabel: (props) => props.value }
         ),
-        summary: fields.text({ label: '摘要', multiline: true }),
+        summary: fields.text({ label: '摘要', multiline: true, description: '文章列表中显示的简短描述' }),
         content: fields.mdx({ label: '内容' }),
       },
     }),
@@ -91,8 +86,8 @@ export default config({
       format: { data: 'json' },
       schema: {
         name: fields.slug({ name: { label: '项目名' } }),
-        description: fields.text({ label: '描述', multiline: true }),
-        url: fields.text({ label: '链接' }),
+        description: fields.text({ label: '项目简介', multiline: true }),
+        url: fields.text({ label: '项目链接', description: '如 GitHub 仓库地址' }),
         category: fields.select({
           label: '分类',
           options: [

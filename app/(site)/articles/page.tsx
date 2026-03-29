@@ -1,7 +1,12 @@
 import FilteredArticleList from "@/components/FilteredArticleList";
 import { getAllArticles } from "@/lib/articles";
+import { getProfile } from "@/lib/content";
+import type { Metadata } from "next";
 
-export const metadata = { title: "文章 — Your Name" };
+export function generateMetadata(): Metadata {
+  const profile = getProfile();
+  return { title: `文章 — ${profile.name}` };
+}
 
 export default function ArticlesPage() {
   const articles = getAllArticles();

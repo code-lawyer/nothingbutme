@@ -1,7 +1,12 @@
 import FilteredProjectList from "@/components/FilteredProjectList";
 import { getAllProjects } from "@/lib/projects";
+import { getProfile } from "@/lib/content";
+import type { Metadata } from "next";
 
-export const metadata = { title: "项目 — Your Name" };
+export function generateMetadata(): Metadata {
+  const profile = getProfile();
+  return { title: `项目 — ${profile.name}` };
+}
 
 export default function ProjectsPage() {
   const projects = getAllProjects();
